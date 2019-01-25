@@ -2,7 +2,6 @@
 
 namespace App\Kernel;
 
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Yaml\Yaml;
 
 class Configuration
@@ -11,7 +10,7 @@ class Configuration
 
     public function __construct()
     {
-        $this->parameters = Yaml::parseFile(dirname(__DIR__) . '/../config/parameters.yaml');
+        $this->parameters = Yaml::parseFile(dirname(__DIR__) . '/../config/parameters.yml');
     }
 
     public function getParameter($key) {

@@ -2,12 +2,13 @@
 
 namespace App\Kernel\Routing;
 
+use App\Kernel\Container;
 use App\Kernel\Exception\MethodNotAllowedHttpException;
 use App\Kernel\Exception\NotFoundHttpException;
 use Symfony\Component\Yaml\Yaml;
 use FastRoute;
 
-class Routeur
+class Router
 {
     private $routes;
 
@@ -17,8 +18,12 @@ class Routeur
 
     private $uri;
 
-    public function __construct()
+    private $container;
+
+    public function __construct(Container $container)
     {
+        $this->container = $container;
+
         $this->httpMethod = $_SERVER['REQUEST_METHOD'];
         $this->uri = $_SERVER['REQUEST_URI'];
 
@@ -38,7 +43,7 @@ class Routeur
         return $this;
     }
 
-    private function setDispacher(): Routeur
+    private function setDispacher(): Router
     {
         $this->dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
             foreach ($this->routes as $route) {
@@ -61,11 +66,10 @@ class Routeur
                 $allowedMethods = $routeInfo[1];
                 throw new MethodNotAllowedHttpException($allowedMethods, 'Method not allowed');
             case FastRoute\Dispatcher::FOUND:
-
                 $data = explode('::', $routeInfo[1]);
                 $controller = $data[0];
                 $method = $data[1];
-                $object =  new $controller();
+                $object =  new $controller($this->container);
 
                 return call_user_func_array(array($object, $method), $routeInfo[2]);
         }
@@ -74,6 +78,17 @@ class Routeur
     public function getDispacher()
     {
         return $this->dispatcher;
+    }
+
+    public function generate(string $routeName, array $parameters): string
+    {
+        if (!array_key_exists($routeName, $this->routes)) {
+            throw new \LogicException("The route $routeName does not exist!");
+        }
+
+        $route = $this->routes[$routeName];
+
+        dump($route);die;
     }
 }
 
