@@ -1,0 +1,7 @@
+blog_list:
+    path:     /blog
+    controller: App\Controller\DefaultController::list
+
+blog_show:
+    path:     /blog/{id:\d+}
+    controller: App\Controller\DefaultController::show
