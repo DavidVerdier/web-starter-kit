@@ -8,15 +8,15 @@
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="{#{ asset('dist/css/style.css') }#}" />
-    <link rel="icon" type="image/png" href="{# asset('dist/images/favicon.png') }#}" />
+    <link rel="stylesheet" href="{{ asset('build/css/style.css') }}" />
+    <link rel="icon" type="image/png" href="{{  asset('build/images/favicon.png') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
 <header>
     <div class="wrap">
-        <h1><img src="<?= asset('dist/images/logo.png') ?>" alt="<?= NOM_CLIENT ?>" /></h1>
+        <h1><img src="{{ asset('build/images/logo.png') }}" alt="{{ client_name }}" /></h1>
         <nav class="main-nav">
             <a class="toggle-nav" href="javascript:void(0);">
                 <span></span>
@@ -88,7 +88,7 @@
 
     <div class="colophon wrap">
         <p>
-            &copy; 2018 - <a href="<?= HTTP ?>"><?= NOM_CLIENT ?></a> - <a href="<?= HTTP ?>mentions-legales.html">Mentions légales</a>
+            &copy; 2018 - <a href="/">{{ client_name }}</a> - <a href="/mentions-legales.html">Mentions légales</a>
         </p>
     </div>
 </footer>
@@ -96,7 +96,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery.cycle2.swipe@1.0.0/jquery.cycle2.swipe.js"></script>
-<script src="<?= asset('dist/js/app.js') ?>"></script>
+<script src="{{  asset('build/js/app.js') }}"></script>
 
 <script>
     $(document).ready(function(){

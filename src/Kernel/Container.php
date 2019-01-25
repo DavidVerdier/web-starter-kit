@@ -53,7 +53,8 @@ class Container
 
             $this->twig->addExtension(new AssetExtension($this->getAsset()));
             $this->twig->addExtension(new DumpExtension());
-           // $twig->addGlobal('is_test', 'jkhkhj');
+
+            $this->twig->addGlobal('client_name', 'Container add global');
         }
 
         return $this->twig;

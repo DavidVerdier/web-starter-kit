@@ -1,0 +1,9 @@
+/vendor/
+/var/
+/public/
+/bin/
+/config/
+/node_modules/
+/src/
+/tests/
+/translations/
