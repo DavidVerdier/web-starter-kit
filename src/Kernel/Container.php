@@ -4,10 +4,17 @@ namespace App\Kernel;
 
 use App\Kernel\Exception\HttpException;
 use App\Kernel\Routing\Router;
+use App\Twig\Extension\AssetExtension;
+use App\Twig\Extension\DumpExtension;
+use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 class Container
 {
+    private $asset;
+
     /**
      * @var Configuration
      */
@@ -44,6 +51,8 @@ class Container
                 'cache' => false
             ]);
 
+            $this->twig->addExtension(new AssetExtension($this->getAsset()));
+            $this->twig->addExtension(new DumpExtension());
            // $twig->addGlobal('is_test', 'jkhkhj');
         }
 
@@ -60,6 +69,26 @@ class Container
         }
 
         return $this->config;
+    }
+
+    /**
+     * @return Package
+     */
+    public function getAsset() : Package
+    {
+        if (null === $this->asset) {
+            $manifest = $this->getConfiguration()->getParameter('assets_json_manifest_path');
+
+            if (null === $manifest) {
+                $version = new EmptyVersionStrategy();
+            } else {
+                $version = new JsonManifestVersionStrategy($manifest);
+            }
+
+            $this->asset =  new Package($version);
+        }
+
+        return $this->asset;
     }
 
     /**
