@@ -5,4 +5,3 @@ blog_list:
 blog_show:
     path:     /blog/{id:\d+}
     controller: App\Controller\DefaultController::show
-
