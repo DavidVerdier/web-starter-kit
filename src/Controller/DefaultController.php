@@ -9,13 +9,13 @@ class DefaultController extends AbstractController
     public function list()
     {
         //return $this->redirect('http://jkfh');
-        return $this->render('index.html.twig');
+        return $this->render('default/index.html.twig');
     }
 
     public function show($id)
     {
-        dump($id);die;
-
-        die('list ok');
+        return $this->render('default/index.html.twig', array(
+            'id' => $id
+        ));
     }
 }

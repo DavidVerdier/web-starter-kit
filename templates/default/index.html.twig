@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main-content wrap">
+        <h2>Exemple POPUP</h2>
+        <a class="btn" href="javascript:void(0);" data-popup="mon-popup">Bouton du popup</a>
+
+        <div id="mon-popup" class="popup">
+            <h3 class="popup-heading">Titre popup</h3>
+            <div class="popup-content">
+                <p>Contenu du popup</p>
+            </div>
+            <a class="close-popup" href="javascript:void(0);">X</a>
+        </div>
+
+        <h2>Exemple Système d'onglets</h2>
+        <nav class="nav-onglets">
+            <a class="actif" href="javascript:void(0);" data-onglet="section1">Lien section 1</a>
+            <a href="javascript:void(0);" data-onglet="section2">Lien section 2</a>
+            <a href="javascript:void(0);" data-onglet="section3">Lien section 3</a>
+        </nav>
+
+        <section id="section1" class="onglet-content open">Contenu de la section 1</section>
+        <section id="section2" class="onglet-content">Contenu de la section 2</section>
+        <section id="section3" class="onglet-content">Contenu de la section 3</section>
+
+    </div>
+{% endblock %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}Web strater kit{% endblock %}</title>
-    <meta name="description" content="{% block description %}Web strater kit{% endblock %}" />
+    <meta name="description" content="{% block description %}Web starter kit{% endblock %}" />
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -41,94 +41,15 @@
 {% block body %}{% endblock %}
 
 <footer>
-    <section class="newsletter wrap">
-        <h2>S'abonner à la newsletter</h2>
-        <div class="news-part-1">
-            <input id="recup-email-news" type="email" placeholder="Adresse e-mail" />
-            <a class="btn" href="javascript:void(0);" data-popup-news="inscrinews">OK</a>
-        </div>
-        <div id="inscrinews" class="popup">
-            <h3 class="popup-heading">
-                Inscription à la newsletter
-            </h3>
-            <?php if(isset($_GET['newsinscri'])) {
-                if($_GET['newsinscri'] == 'ok' ) { ?>
-            <div class="popup-content">
-                <p>Merci pour votre inscription. </p>
-            </div>
-            <?php } else { ?>
-            <div class="popup-content">
-                <p class="msg-info error">
-                    Votre adresse e-mail est déjà présente dans notre base de données. <br />
-                    Vous êtes déjà inscrit à notre newsletter.
-                </p>
-                <a href="?newstryagain" class="btn btn-primary">Réssayer</a>
-            </div>
-            <?php }
-            } else { ?>
-            <form class="theme-variant popup-content" method="post">
-                <div>
-                    <label for="email-newsletter">Saisissez votre adresse-email pour recevoir notre newsletter.</label>
-                    <input id="email-newsletter" type="email" name="email_news" placeholder="Ex : pdupuis@gmail.com" required />
-                    <p class="checkbox">
-                        <input type="checkbox" name="rgpd" id="rgpd-check" required/>
-                        <label for="rgpd-check">
-                            <span>
-                                je souhaite m'inscrire à la newsletter et j'ai pris connaissance des <a href="<?= HTTP ?>mentions-legales.html" target="_blank">mentions légales et de la gestion des données personnelles</a>.
-                            </span>
-                        </label>
-                    </p>
-                    <input type="submit" value="Inscription" />
-                </div>
-            </form>
-            <?php } ?>
-            <a class="close-popup" href="javascript:void(0);">X</a>
-        </div>
-    </section> <!-- .newsletter -->
-
     <div class="colophon wrap">
         <p>
-            &copy; 2018 - <a href="/">{{ client_name }}</a> - <a href="/mentions-legales.html">Mentions légales</a>
+            &copy; {{ 'now'|date('Y') }} - <a href="/">{{ client_name }}</a> - <a href="/mentions-legales.html">Mentions légales</a>
         </p>
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.cycle2.swipe@1.0.0/jquery.cycle2.swipe.js"></script>
 <script src="{{  asset('build/js/app.js') }}"></script>
 
-<script>
-    $(document).ready(function(){
-
-        // NEWSLETTER POPUP
-    <?php if(isset($_GET['newsinscri']) || isset($_GET['newstryagain'])) { ?>
-            $('body').addClass('mode-popup');
-            $('#inscrinews').addClass('open');
-        <?php } ?>
-    });
-</script>
-
-<?php /*
-
-<script id="cookiebanner" src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.2/cookiebanner.min.js"
-    data-position="bottom"
-    data-fg="#ffffff"
-    data-bg="rgba(0,0,0,.8)"
-    data-link="#f5f5f5"
-    data-moreinfo="https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi"
-    data-message="Les cookies assurent le bon fonctionnement de notre site Internet. En utilisant ce dernier, vous acceptez leur utilisation."
-    data-linkmsg="En savoir plus">
-</script>
-
-*/ ?>
-
-
-<script>
-    $(document).ready(function() {
-        // set jquery here
-    }); // DOC READY
-</script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
