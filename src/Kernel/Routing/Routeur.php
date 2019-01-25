@@ -42,7 +42,8 @@ class Routeur
     {
         $this->dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
             foreach ($this->routes as $route) {
-                $r->addRoute('GET', $route["path"], $route["controller"]);
+                $method = isset($route["method"]) ? $route["method"] : 'GET';
+                $r->addRoute($method, $route["path"], $route["controller"]);
             }
         });
 

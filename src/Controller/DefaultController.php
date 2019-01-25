@@ -4,12 +4,13 @@ namespace App\Controller;
 
 class DefaultController
 {
-    public function list() {
+    public function list()
+    {
         die('list ok');
     }
 
-    public function show($id) {
-
+    public function show($id)
+    {
         dump($id);die;
 
         die('list ok');

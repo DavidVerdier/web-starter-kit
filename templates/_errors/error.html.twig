@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>{{ exception.statusCode }} - Fi.360°</title>{% endblock %}
+
+{% block body %}
+  <div class="wrap">
+    <div class="head">
+      <h2>Erreur <strong>{{ exception.statusCode }}</strong></h2>
+    </div> <!-- head -->
+    
+    {% if exception.statusCode == 404 %}
+      <h3>La page que vous cherchez n'existe pas (ou plus).</h3>
+    {% elseif exception.statusCode == 500 %}
+      <h3>Oops, la page est cassée !</h3>
+    {% else %}
+      {% if exception.message %}
+        <h3>{{ exception.message }}</h3>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

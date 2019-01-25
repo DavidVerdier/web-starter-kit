@@ -8,6 +8,12 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 use App\Kernel\Routing\Routeur;
 use Symfony\Component\HttpFoundation\Response;
 
+
+$loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
+$twig = new Twig_Environment($loader, [
+    'cache' => false,
+]);
+
 try {
     $router = new Routeur();
     $router->handleRoutes();
@@ -18,6 +24,11 @@ try {
             $e->getStatusCode(),
             ['content-type' => 'text/html']
         );
+
+        $response->setContent(
+            $twig->render('_errors/error.html.twig', ['name' => 'Fabien'])
+        );
+
 
         $response->send();
     }
