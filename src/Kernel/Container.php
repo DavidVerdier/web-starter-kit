@@ -4,7 +4,6 @@ namespace App\Kernel;
 
 use App\Kernel\Bridges\Routing;
 use App\Kernel\Exception\HttpException;
-use App\Kernel\Routing\Router;
 use App\Twig\Extension\AssetExtension;
 use App\Twig\Extension\DumpExtension;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
@@ -17,7 +16,6 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-
 
 class Container
 {
@@ -37,7 +35,7 @@ class Container
     private $twig;
 
     /**
-     * @var Router
+     * @var Routing
      */
     private $router;
 

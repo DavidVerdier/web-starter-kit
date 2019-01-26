@@ -11,8 +11,6 @@
     "require": {
         "php": ">=7.2",
         "ext-pdo": "*",
-        "doctrine/annotations": "^1.6",
-        "doctrine/cache": "^1.8",
         "doctrine/orm": "^2.6",
         "incenteev/composer-parameter-handler": "^2.1",
         "symfony/asset": "^4.2",

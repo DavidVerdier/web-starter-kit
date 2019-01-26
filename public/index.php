@@ -7,4 +7,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $container = new \App\Kernel\Container();
 
-$container->start();
+try {
+    $container->start();
+} catch (\Exception $e) {
+    return $e;
+}
