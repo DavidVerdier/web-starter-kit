@@ -3,7 +3,7 @@ blog_list:
     controller: App\Controller\DefaultController::list
 
 blog_show:
-    path:     /blog/{id:\d+}
+    path:     /blog/{id}
     controller: App\Controller\DefaultController::show
 
 test:

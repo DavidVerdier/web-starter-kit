@@ -95,9 +95,12 @@ class AbstractController implements ControllerInterface
 
     /**
      * @return EntityManager
+     * @throws \Doctrine\ORM\ORMException
      */
     public function getDoctrine(): EntityManager
     {
         return $this->container->getDoctrine();
     }
+
+
 }
