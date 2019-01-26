@@ -3,6 +3,7 @@
 namespace App\Kernel\Controller;
 
 use App\Kernel\Container;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -93,11 +94,10 @@ class AbstractController implements ControllerInterface
     }
 
     /**
-     * @return \PDO
+     * @return EntityManager
      */
-    public function getDatabase(): \PDO
+    public function getDoctrine(): EntityManager
     {
-        // FIXME
-        return new \PDO();
+        return $this->container->getDoctrine();
     }
 }

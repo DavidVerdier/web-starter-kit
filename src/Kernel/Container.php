@@ -6,10 +6,13 @@ use App\Kernel\Exception\HttpException;
 use App\Kernel\Routing\Router;
 use App\Twig\Extension\AssetExtension;
 use App\Twig\Extension\DumpExtension;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Asset\Package;
 use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
 
 class Container
 {
@@ -30,6 +33,7 @@ class Container
      */
     private $router;
 
+    private $doctrine;
     /**
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -125,5 +129,41 @@ class Container
         }
 
         return $this->router;
+    }
+
+    public function getDoctrine()
+    {
+        if (null === $this->doctrine) {
+            $isDevMode = $this->getConfiguration()->getParameter('env') === 'prod' ? false : true;
+            $proxyDir = null;
+            $cache = null;
+            $useSimpleAnnotationReader = false;
+
+            $config = Setup::createAnnotationMetadataConfiguration(
+                [__DIR__ .  "/../../src/Entity"],
+                $isDevMode,
+                $proxyDir,
+                $cache,
+                $useSimpleAnnotationReader
+            );
+
+            $conn = array(
+                'driver'   => $this->getConfiguration()->getParameter('database_driver'),
+                'user'     =>  $this->getConfiguration()->getParameter('database_user'),
+                'password' =>  $this->getConfiguration()->getParameter('database_password'),
+                'dbname'   =>  $this->getConfiguration()->getParameter('database_name'),
+                'host'     => $this->getConfiguration()->getParameter('database_host'),
+                'port'     => $this->getConfiguration()->getParameter('database_port'),
+            );
+
+            $this->doctrine = EntityManager::create($conn, $config);
+        }
+
+        return $this->doctrine;
+    }
+
+    public function doctrineConsoleRunner()
+    {
+        return ConsoleRunner::createHelperSet($this->getDoctrine());
     }
 }

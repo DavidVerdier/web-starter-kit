@@ -8,6 +8,7 @@ class DefaultController extends AbstractController
 {
     public function list()
     {
+        dump($this->getDoctrine()->getConnection());
         //return $this->redirect('http://jkfh');
         return $this->render('default/index.html.twig');
     }
