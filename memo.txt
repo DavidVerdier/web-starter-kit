@@ -1,0 +1,92 @@
+PDO aujourd'hui personne ne s'en plein
+webpack aujourd'hui personne ne s'en plein
+
+
+Explication du pattern MVC : 
+
+MVC est un design pattern c'est le plus utilisé sur le web depuis sa création. MVC à été concut par les développeurs pour les développeurs afin de répondre au problèmes les plus courant.
+
+Le pattern MVC : 
+
+	Il est modulaire : généralement découpé en de nombreux fichiers, chaque fichier a un et un seul rôle à la fois.
+
+	Il est découplé : les fichiers sont conçus pour fonctionner indépendamment les uns des autres.
+
+	Il est documenté : la documentation prend généralement la forme de commentaires spéciaux placés au dessus des méthodes et classes publiques, 
+                           pouvant être réutilisées dans d'autres projets (renseignez-vous sur la PHPdoc). 
+                           On peut générer automatiquement une page web de documentation à partir de ces commentaires.
+
+	Il est en anglais : c'est la langue des développeurs et développeuses partout sur la planète. 
+                            Les variables et les noms des fonctions sont en anglais et peuvent être compris par tous.
+
+	Il est clair : chaque fichier est généralement assez court (jamais des fichiers de 1000 lignes !), et le code à l'intérieur peut se lire comme de la prose.
+
+	*** 
+	Les professionnels disent d'ailleurs qu'un code qui nécessite beaucoup de commentaires est un code trop complexe. 
+        Un code bien écrit contient des commentaires qui expliquent le pourquoi, pas le comment.
+	***
+
+Ce genre de code a de nombreux bénéfices :
+
+	Il est réutilisable : si un jour nous avons codé un fichier utile, nous pouvons nous en resservir dans un autre projet, ou dans un autre endroit du même projet. On gagne du temps en n'ayant pas à tout refaire à chaque fois !
+
+	Il est facile d'y travailler à plusieurs : chaque fichier étant indépendant (et généralement de petite taille), on peut travailler en équipe de 5, 10, voire 100 personnes sur un même projet. 
+        Si tout était mélangé dans un seul et même gros fichier, il serait impossible de le modifier en même temps !
+
+	Il est évolutif : quand quelqu'un vient vous demander une nouvelle fonctionnalité, il est facile de l'ajouter. 
+                          Vous n'avez pas peur de tout casser. Vous savez que ça va marcher, et votre code ne sera pas plus compliqué.
+
+Le dernier point (un code évolutif) est très important. Si on demande à un développeur expérimenté chez OpenClassrooms :
+"Qu'est-ce qu'un bon code ?"
+
+Celui-ci vous répondra en général :
+"C'est un code qui est apte au changement."
+
+
+Le Starter KIT que j'ai dévéloppé:
+
+il utilise le pattern MVC mais aussi:
+
+    Moteur de template (TWIG)
+
+	Les templates vont nous permettre de séparer le code PHP du code HTML/XML/Text, etc. 
+	Seulement, pour faire du HTML de présentation, on a toujours besoin d'un peu de code dynamique : 
+		faire une boucle pour afficher toutes les annonces de notre plateforme, 
+		créer des conditions pour afficher un menu différent pour les utilisateurs authentifiés ou non, etc. 
+		Pour faciliter ce code dynamique dans les templates, le moteur de templates Twig offre son pseudo-langage à lui.
+		 Ce n'est pas du PHP, mais c'est plus adapté et voici pourquoi :
+
+			* La syntaxe est plus concise et plus claire. Rappelez-vous, pour afficher une variable,{{ mavar }}suffit, alors qu'en PHP il faudrait faire<?php echo $mavar; ?>.
+			* Il y a quelques fonctionnalités en plus, comme l'héritage de templates (nous le verrons). Cela serait bien entendu possible en PHP, mais il faudrait coder soi-même le système et cela ne serait pas aussi esthétique.
+			* Il sécurise vos variables automatiquement : plus besoin de se soucier dehtmlentities(),addslashes()ou que sais-je encore.
+
+	Pour ceux qui se posent la question de la rapidité : aucune inquiétude ! 
+	Oui, il faut transformer le langage Twig en PHP avant de l'exécuter pour, finalement, afficher notre contenu. 
+	Mais Twig ne le fait que la première fois et met en cache du code PHP simple afin que, dès la deuxième exécution de votre page, ce soit en fait aussi rapide que du PHP simple.
+         
+    Un routeur (symfony/routing)
+
+	Comme nous avons pu le voir, le rôle du routeur est, à partir d'une URL, de déterminer quel contrôleur appeler et avec quels arguments. 
+	Cela permet de configurer son application pour avoir de très belles URL, ce qui est important pour le référencement et même pour le confort des visiteurs. 
+	Soyons d'accord, l'URL /article/le-systeme-de-route est bien plus sexy que index.php?controleur=article&methode=voir&id=5 !
+
+	Vous avez sans doute déjà entendu parler d'URL Rewriting ? 
+	Le routeur, bien que différent, permet effectivement de faire l'équivalent de l'URL Rewriting, mais il le fait côté PHP, et donc est bien mieux intégré à notre code.
+
+    Un ORM (doctrine)
+
+	L'objectif d'un ORM (pour Object-Relation Mapper, soit en français « lien objet-relation ») est simple : 
+		se charger de l'enregistrement des données en vous faisant oublier que vous avez une base de données. 
+		Comment ? En s'occupant de tout ! Nous n'allons plus écrire de requêtes, ni créer de tables via phpMyAdmin. 
+		Dans notre code PHP, nous allons faire appel à l'ORM, pour faire tout cela.
+
+        "php": ">=7.2",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "symfony/asset": "^4.2",
+        "symfony/config": "^4.2",
+        "symfony/http-foundation": "^4.2",
+        "symfony/var-dumper": "^4.2",
+        "symfony/webpack-encore-pack": "^1.0",
+        "symfony/yaml": "^4.2",
+        "symfony/dotenv": "^4.2"
+
